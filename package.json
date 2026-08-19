@@ -1,0 +1,53 @@
+{
+  "name": "trainr",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Real-time fastpitch softball pitch tracker for the browser",
+  "scripts": {
+    "dev": "vite",
+    "dev:https": "vite --https",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:regression": "vitest run --testNamePattern=regression",
+    "test:contrast": "vitest run src/design/__tests__/contrast.test.ts",
+    "test:e2e": "playwright test",
+    "signal": "node server/signaling.mjs",
+    "test:signaling:live": "vitest run src/net/__tests__/supabaseTransport.live.test.ts"
+  },
+  "dependencies": {
+    "@fontsource/barlow-condensed": "^5.0.19",
+    "@fontsource/inter": "^5.0.18",
+    "@mediapipe/tasks-vision": "^0.10.14",
+    "@supabase/supabase-js": "^2.112.3",
+    "dexie": "^4.0.8",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0",
+    "@types/node": "^26.2.0",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "eruda": "^3.4.3",
+    "jsdom": "^25.0.0",
+    "postcss": "^8.4.45",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.3",
+    "vite-plugin-pwa": "^0.20.5",
+    "vitest": "^2.0.5",
+    "workbox-build": "^7.1.0",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=18.16"
+  }
+}

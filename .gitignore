@@ -1,0 +1,25 @@
+# Local HTTPS certificates. dev-key.pem is a PRIVATE KEY and must never be committed.
+certs/
+
+# Dependencies and build output
+node_modules/
+dist/
+dev-dist/
+*.tsbuildinfo
+
+# Environment files. Every VITE_ var is public once built, but these can also hold
+# a Supabase service_role key, which must never leave this machine.
+.env
+.env.*
+!.env.example
+
+# Test and tooling output
+coverage/
+playwright-report/
+test-results/
+.vercel/
+
+# OS / editor
+*.local
+.DS_Store
+Thumbs.db

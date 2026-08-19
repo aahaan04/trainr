@@ -1,0 +1,132 @@
+/**
+ * CSS custom properties mirroring src/design/tokens.ts. Keep the two in sync;
+ * the contrast test reads the TS file, so a drift here is a silent regression.
+ */
+
+:root {
+  /* Neutrals */
+  --surface-0: #f6f7fb;
+  --surface-1: #ffffff;
+  --surface-2: #eef0f7;
+  --border: #dfe3ee;
+  --border-strong: #c3c9dc;
+  --text-primary: #14163a;
+  --text-secondary: #5a6080;
+  --text-tertiary: #656a88;
+
+  /* Indigo — brand and chrome */
+  --indigo-900: #14163a;
+  --indigo-700: #232766;
+  --indigo-600: #2e3391;
+  --indigo-500: #3d45b8;
+  --indigo-100: #e4e6f8;
+
+  /* Green — STRIKE and positive outcomes only */
+  --green-700: #067a43;
+  --green-500: #12c46b;
+  --green-400: #3be08d;
+  --green-100: #dff9ec;
+
+  /* Coral — BALL and misses only */
+  --coral-700: #c43418;
+  --coral-500: #ff5a3c;
+  --coral-100: #ffe6e0;
+
+  /* Optic yellow — the ball and its trajectory. Never chrome. */
+  --optic: #d8e600;
+  --optic-glow: #f2ff4d;
+
+  /* Amber — caution, low tracking confidence */
+  --amber-600: #a05f00;
+  --amber-500: #ffb020;
+  --amber-100: #fff3dc;
+
+  /* Shape */
+  --radius-input: 8px;
+  --radius-card: 16px;
+  --radius-sheet: 24px;
+  --radius-pill: 9999px;
+
+  /* Elevation — indigo-tinted, never neutral grey */
+  --elev-rest: 0 2px 8px rgba(20, 22, 58, 0.06);
+  --elev-raised: 0 8px 24px rgba(20, 22, 58, 0.1);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --dur-hover: 150ms;
+  --dur-sheet: 250ms;
+  --dur-call: 400ms;
+  --dur-orbit: 600ms;
+
+  /* Type */
+  --font-display: 'Barlow Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Derived, so overlay code has one place to read stroke weights from */
+  --overlay-stroke: 2px;
+  --overlay-stroke-thin: 1px;
+  --tap-target: 44px;
+  --text-halo: none;
+}
+
+/**
+ * Sunlight mode. Toggled by data-sunlight on <html>, either manually or suggested
+ * from an ambient light reading during setup.
+ */
+:root[data-sunlight='true'] {
+  --text-secondary: var(--indigo-900);
+  --text-tertiary: var(--indigo-900);
+  --text-primary: var(--indigo-900);
+  --border: var(--border-strong);
+  --overlay-stroke: 3px;
+  --overlay-stroke-thin: 1.5px;
+  --tap-target: 56px;
+  --text-halo: 0 0 6px rgba(20, 22, 58, 0.72), 0 0 2px rgba(20, 22, 58, 0.9);
+}
+
+/* Text drawn over the live camera feed always needs a halo in sunlight mode. */
+[data-sunlight='true'] .over-video {
+  text-shadow: var(--text-halo);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--surface-0);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  /* The app is used on a tripod outdoors; never bounce-scroll the live view. */
+  overscroll-behavior: none;
+}
+
+/**
+ * Without tabular figures the velocity readout visibly jitters as digit widths
+ * change. This is not optional.
+ */
+.num,
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
